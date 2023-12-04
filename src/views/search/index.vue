@@ -192,7 +192,7 @@ export default {
             })
         },
         toTxDetail(item) {
-            console.log(item);
+            // console.log(item);
             this.$router.push({
                 'path': 'transaction',
                 'query': { transHash: item.hash, blockTimestamp: this.timeAge(item.timestamp) }

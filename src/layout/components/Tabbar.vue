@@ -17,7 +17,7 @@ import blockPng from '@/assets/image/block.png'
 export default {
     setup() {
         onMounted(() => {
-            console.log(blockPng)
+            // console.log(blockPng)
         })
         const icon1 = blockPng
         return {
@@ -26,7 +26,7 @@ export default {
     },
     methods: {
         onChange(index) {
-            console.log(index);
+            // console.log(index);
         }
     }
 }

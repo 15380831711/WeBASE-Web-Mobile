@@ -41,7 +41,7 @@ import { Toast } from 'vant';
 export default {
     name: 'TxInfo',
     setup() {
-        const groupId = ref(+sessionStorage.getItem('groupId'))
+        const groupId = ref(sessionStorage.getItem('groupId'))
         const state = reactive({
             loading: false,
             finished: false,
@@ -64,7 +64,7 @@ export default {
             state.loading = false;
             if (data.code === 0) {
                 state.nodeData = state.nodeData.concat(data.data)
-                console.log(state.nodeData,data.data)
+                // console.log(state.nodeData,data.data)
                 if (state.nodeData.length >= data.totalCount) {
                     state.finished = true;
                 }

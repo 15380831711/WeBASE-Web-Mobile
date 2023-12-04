@@ -24,7 +24,7 @@ function resolve(dir) {
 //     ]
 // };
 module.exports = {
-    publicPath: process.env.NODE_ENV === "production" ? "/" : "/",
+    publicPath: process.env.NODE_ENV === "production" ? "./" : "./",
     outputDir: "dist",
     assetsDir: "static",
     lintOnSave: false,
@@ -38,24 +38,28 @@ module.exports = {
         },
         open: false,
         hotOnly: true,
-        host: "localhost",
-        port: 8080,
+        host: "0.0.0.0",
+        port: process.env.port,
         proxy: {
             "/mgr": {
-                target: "http://127.0.0.1/",
+                target: process.env.PROXY_TARGET_API,
                 // ws: true,
                 changeOrigin: true,
                 pathRewrite: {
                     "^/mgr": "",
                 },
+                // logLevel: 'debug',
             },
         },
     },
     productionSourceMap: false,
     chainWebpack: (config) => {
+        config.plugin('html').tap(args => {
+            args[0].title = process.env.title || ''
+            return args;
+        });
         config.plugins.delete("preload");
         config.plugins.delete("prefetch");
-        
         config.optimization.minimize(true);
         config.optimization.splitChunks({
             chunks: 'all'
@@ -105,7 +109,6 @@ module.exports = {
                 filename: "[path].gz[query]",
                 minRatio: 0.8,
                 threshold: 10240,
-
             }),
         ],
     },

@@ -1,10 +1,11 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Layout from '@/layout'
+import SubLayout from '@/layout/sub'
 // import Tabbar from '@/tabbar'
 const routes = [
     {
         path: '/',
-        redirect: '/login',
+        redirect: '/home',
     },
     {
         path: "/login",
@@ -26,7 +27,7 @@ const routes = [
     },
     {
         path: '/',
-        component: Layout,
+        component: SubLayout,
         children: [
             {
                 path: 'txInfo',
@@ -39,7 +40,7 @@ const routes = [
     },
     {
         path: '/',
-        component: Layout,
+        component: SubLayout,
         children: [
             {
                 path: 'blockInfo',
@@ -52,7 +53,7 @@ const routes = [
     },
     {
         path: '/',
-        component: Layout,
+        component: SubLayout,
         children: [
             {
                 path: 'nodeInfo',
@@ -65,7 +66,7 @@ const routes = [
     },
     {
         path: '/',
-        component: Layout,
+        component: SubLayout,
         children: [
             {
                 path: 'my',
@@ -74,11 +75,10 @@ const routes = [
                 meta: { title: '我的' }
             }
         ]
-
     },
     {
         path: '/',
-        component: Layout,
+        component: SubLayout,
         children: [
             {
                 path: 'block',
@@ -90,7 +90,7 @@ const routes = [
     },
     {
         path: '/',
-        component: Layout,
+        component: SubLayout,
         children: [
             {
                 path: 'transaction',
@@ -102,7 +102,7 @@ const routes = [
     },
     {
         path: '/',
-        component: Layout,
+        component: SubLayout,
         children: [
             {
                 path: 'search',
@@ -114,7 +114,7 @@ const routes = [
     },
     {
         path: '/',
-        component: Layout,
+        component: SubLayout,
         children: [
             {
                 path: 'set',
@@ -126,7 +126,7 @@ const routes = [
     },
     {
         path: '/',
-        component: Layout,
+        component: SubLayout,
         children: [
             {
                 path: 'contract',

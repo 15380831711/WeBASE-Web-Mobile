@@ -15,11 +15,11 @@ export default {
     },
     // watch
     mounted(){
-        console.log(window.location.hash);
+        // console.log(window.location.hash);
     },
     methods: {
         onChange(index) {
-            console.log(index);
+            // console.log(index);
         }
     }
 }

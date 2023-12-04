@@ -132,7 +132,7 @@ export default {
     // setup(props) {
 
     //     watchEffect(() => {
-    //         console.log(props.reloadNum, 'reloadNum');
+    //         // console.log(props.reloadNum, 'reloadNum');
     //     })
 
     //     let echarts = inject("ec");
@@ -163,7 +163,7 @@ export default {
     //                 show: true,
     //                 trigger: "axis",
     //                 formatter: function (data) {
-    //                     console.log('xxxxxx', data);
+    //                     // console.log('xxxxxx', data);
     //                     return (
     //                         '<span style="font-size:10px">' +
     //                         data[0].name +

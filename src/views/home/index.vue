@@ -1,6 +1,6 @@
 <template>
     <div style="background: rgba(92,134,218,0.05);">
-        <div class="home-wrapper">
+        <!-- <div class="home-wrapper">
             <van-popup v-model:show="show" position="left" overlay-class="menu-wrapper" :teleport="myContainer">
                 <div class="popup-wrapper">
                     <div class="user-wrapper">
@@ -26,9 +26,9 @@
                     </div>
                 </div>
             </van-popup>
-        </div>
+        </div> -->
 
-        <div>
+        <!-- <div>
             <div class="van-nav-bar van-hairline--bottom">
                 <div class="van-nav-bar__content">
                     <div class="van-nav-bar__left">
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="search-wrapper">
             <van-search background='rgba(92,134,218,0.05)' v-model="searchValue" placeholder="请输入块高/交易Hash" @focus="focus" />
@@ -242,12 +242,12 @@
 </template>
 <script>
 
-import { reactive, ref, toRefs, onMounted, provide, computed } from 'vue'
+import { reactive, ref, toRefs, onMounted, provide } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getChartData, getNetworkStatistics, getNodeList, getBlockPage, getTransactionList, getConsensusNodeId, getGroupsInvalidIncluded } from '@/api/home.js'
+import { getChartData, getNetworkStatistics, getNodeList, getBlockPage, getTransactionList, getGroupsInvalidIncluded } from '@/api/home.js'
 import { loginOut } from "@/api/login.js";
-import { Toast, Cell, CellGroup, List, Tab, Tabs, Swipe, SwipeItem, Search, Popup, Divider, DropdownMenu, DropdownItem } from 'vant';
-import { changWeek, numberFormat, unique } from "@/utils/util.js";
+import { Toast } from 'vant';
+import { changWeek } from "@/utils/util.js";
 import clip from '@/utils/clipboard.js'
 import lineCharts from "@/components/Charts/LineCharts";
 import * as echarts from 'echarts'
@@ -257,6 +257,10 @@ export default {
         lineCharts
     },
     setup() {
+        const { query } = useRoute();
+        if (query && query.t) {
+            localStorage.setItem("token", query.t);
+        }
         provide('ec', echarts)
         const clientVersion = localStorage.getItem('clientVersion')
         const myContainer = document.querySelector('.home-wrapper');
@@ -264,7 +268,7 @@ export default {
         const reloadNum = ref(1)
         const searchValue = ref('');
         const active = ref(0);
-        const groupId = ref(+sessionStorage.getItem('groupId'))
+        const groupId = ref(sessionStorage.getItem('groupId'))
         const router = useRouter()
         const state = reactive({
             loading: false,
@@ -357,7 +361,6 @@ export default {
         const handleLoginOut = () => {
             queryLoginOut();
         };
-
         onMounted(() => {
             queryGroupInfo()
         })
@@ -394,7 +397,7 @@ export default {
                 }
 
             } else {
-                groupList.value = [];
+                state.groupList = [];
                 Toast.fail(data.message)
                 sessionStorage.setItem("groupId", "")
             }
@@ -458,7 +461,7 @@ export default {
             }
         }
         const queryNodeList = async () => {
-            console.log('queryNodeList', state.reqNode);
+            // // console.log('queryNodeList', state.reqNode);
             const { data } = await getNodeList(state.reqNode, state.reqQuery);
             state.loading = false;
             if (data.code === 0) {
@@ -520,7 +523,6 @@ export default {
         }
     },
     mounted() {
-
     },
     methods: {
         toLink(val) {

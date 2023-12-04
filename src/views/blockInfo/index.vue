@@ -31,15 +31,17 @@
 <script>
 import { reactive, ref, toRefs, onMounted, provide, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getChartData, getNetworkStatistics, getNodeList, getBlockPage, getTransactionList, getConsensusNodeId, getGroupsInvalidIncluded } from '@/api/home.js'
-import { Toast, Cell, CellGroup, List, Tab, Tabs, Swipe, SwipeItem, Search, Popup, Divider, DropdownMenu, DropdownItem } from 'vant';
+import { getBlockPage } from '@/api/home.js'
+import { Toast } from 'vant';
+
+// console.log("groupId", sessionStorage.getItem('groupId'));
 
 export default {
     name: 'TxInfo',
     setup() {
         const route = useRoute()
         const router = useRouter()
-        const groupId = ref(+sessionStorage.getItem('groupId'))
+        const groupId = ref(sessionStorage.getItem('groupId'))
         const state = reactive({
             loading: false,
             finished: false,

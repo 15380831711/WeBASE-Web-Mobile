@@ -507,9 +507,9 @@ export default {
         }
         //解析output
         const decodeOutPutfun = (output, abiData) => {
-            console.log(output, abiData, 'xxxx');
+            // console.log(output, abiData, 'xxxx');
             const web3 = new Web3(Web3.givenProvider);
-            console.log(web3);
+            // console.log(web3);
         }
         //解析logs
         const decodeEventClick = async () => {
@@ -599,7 +599,7 @@ export default {
 
         }
         const decodeLogBtn = (item, index) => {
-            console.log(item, index);
+            // console.log(item, index);
             if (item.index == index) {
 
                 item.eventDataShow = !item.eventDataShow

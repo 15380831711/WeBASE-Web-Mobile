@@ -1,11 +1,10 @@
 <template>
-    <div class="module">
+    <div class="module" :class="{'navbar-wrap': navbar}">
         <router-view/>
-        
     </div>
 </template>
 <script>
-import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
+import { onBeforeRouteUpdate } from 'vue-router'
 export default {
     name: "AppMain",
     setup(){
@@ -15,11 +14,14 @@ export default {
         return {
             
         }
-    }
+    },
+    props: {
+        navbar: Boolean
+    },
 }
 </script>
 <style scoped>
-.module{
+.navbar-wrap{
     padding-top: 50px;
     padding-bottom: 60px;
     box-sizing: border-box;

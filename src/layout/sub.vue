@@ -1,16 +1,16 @@
 <template>
     <div>
-        <app-main />
-        <!-- <tabbar /> -->
+        <navbar />
+        <app-main navbar/>
     </div>
 </template>
 <script>
-import { AppMain, Tabbar } from './components'
+import { AppMain, Navbar } from './components'
 export default {
     name: 'Layout',
     components: {
         AppMain,
-        Tabbar,
+        Navbar,
     },
     setup() {
 

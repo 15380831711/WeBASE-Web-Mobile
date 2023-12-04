@@ -34,7 +34,7 @@ export default {
         const verifyRef = ref(null)
         const authToken = ref(null)
         const loading = ref(false)
-        console.log('loading',loading);
+        // console.log('loading',loading);
         const userForm = reactive({
             username: '',
             password: '',
@@ -42,7 +42,7 @@ export default {
         });
         const queryFronts = async () => {
             const { data } = await fetchFronts();
-            if (data.code === 0) {
+            if (data && data.code === 0) {
                 if (data.data.length) {
                     localStorage.setItem('clientVersion', data.data[0]["clientVersion"])
                 }

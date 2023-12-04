@@ -74,10 +74,9 @@ export function getConsensusNodeId(data) {
 
 
 //all group
-export function getGroupsInvalidIncluded(data, list) {
-    const params = reviseParam(data, list);
+export function getGroupsInvalidIncluded(data) {
     return get({
-        url: `/group/all/invalidIncluded/${params.str}`,
+        url: `/group/all/invalidIncluded/1/10`,
         method: 'get',
         headers: {
             AuthorizationToken: "Token " + localStorage.getItem("token") || ""

@@ -16,7 +16,7 @@
 import Axios from 'axios'
 import router from '../router'
 let axiosIns = Axios.create({
-    baseURL: '/mgr/WeBASE-Node-Manager/',
+    baseURL: process.env.VUE_APP_BASE_API,
     timeout: 60 * 1000
 });
 // axiosIns.defaults.baseURL = 'http://127.0.0.1:8081';

@@ -47,7 +47,7 @@ import {dateFormat} from "@/utils/util"
 export default {
     name: 'TxInfo',
     setup() {
-        const groupId = ref(+sessionStorage.getItem('groupId'))
+        const groupId = ref(sessionStorage.getItem('groupId'))
         const state = reactive({
             loading: false,
             finished: false,

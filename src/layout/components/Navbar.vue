@@ -9,9 +9,6 @@
     </van-nav-bar>
 </template>
 <script>
-import { computed, getCurrentInstance, onMounted, ref } from 'vue';
-import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
-import { Toast } from 'vant'
 export default {
     data() {
         return {
