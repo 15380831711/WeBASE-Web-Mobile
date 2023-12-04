@@ -88,12 +88,12 @@
                                         <table>
                                             <thead>
                                                 <tr>
-                                                    <th style="border:1px solid #EBEEF5;padding: 2px 6px;" v-for="item in inputHead">{{item.name}}</th>
+                                                    <th class="input-th" v-for="item in inputHead" :key="item.name">{{item.name}}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr v-for="content in inputData">
-                                                    <td style="border:1px solid #EBEEF5;padding: 2px 6px;word-break: break-all;" v-for="head in inputHead">
+                                                <tr v-for="(content, contentIndex) in inputData" :key="contentIndex">
+                                                    <td class="input-th" :class="`input-td-${head.enName}`" v-for="head in inputHead" :key="head.enName">
                                                         {{content[head.enName]}}
                                                     </td>
                                                 </tr>
@@ -180,10 +180,8 @@
                                     <div style="display: flex;">
                                         <span class="event-log-key">Topics </span>
                                         <div>
-                                            <span class="event-log-value topics"  v-for="(val,index) in item.topics ">[{{index}}] {{val}}</span>
+                                            <span class="event-log-value topics"  v-for="(val,index) in item.topics">[{{index}}] {{val}}</span>
                                         </div>
-                                        
-
                                     </div>
                                     <div style="display: flex;">
                                         <span class="event-log-key">data </span>
@@ -403,12 +401,14 @@ export default {
             const txReceiptData = await getTransactionReceipt(txReceiptParam, {})
             if (txReceiptData.data.code === 0) {
                 state.txInfoReceiptMap = txReceiptData.data.data
-                txReceiptData.data.data.logs.forEach((log, index) => {
-                    log.eventDataShow = true,
-                        log.eventTitle = '还原',
-                        log.index = index
-                })
-                state.eventLog = txReceiptData.data.data.logs
+                if (Array.isArray(txReceiptData.data.data.logs)) {
+                    txReceiptData.data.data.logs.forEach((log, index) => {
+                        log.eventDataShow = true,
+                            log.eventTitle = '还原',
+                            log.index = index
+                    })
+                    state.eventLog = txReceiptData.data.data.logs
+                }
             } else {
                 Toast.fail(txReceiptData.data.message)
             }
@@ -663,7 +663,7 @@ export default {
     margin-top: 12px;
 }
 .input-key-item {
-    min-width: 70px;
+    min-width: 45px;
     display: inline-block;
     padding: 5px 0;
     font-size: 12px;
@@ -691,5 +691,9 @@ table {
 .topics {
     display: inline-block;
     word-break: break-all;
+}
+.input-th {
+    border: 1px solid #EBEEF5;
+    padding: 2px 6px;
 }
 </style>
