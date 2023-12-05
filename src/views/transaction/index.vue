@@ -2,8 +2,8 @@
     <div class="tx-wrapper">
         <van-tabs v-model:active="active" color="#5C86DA" @click="changeTab">
             <van-tab title="交易信息">
-                <template v-for="(item , index) in transInfoKey" :key="index">
-                    <div v-if="item.key != 'input'" style="display: flex; font-size: 12px; background:#fff; padding:12px 16px;" class="van-hairline--bottom">
+                <template v-for="(item , index) in transInfoKey">
+                    <div v-if="item.key != 'input' && transInfoData[item.key]" style="display: flex; font-size: 12px; background:#fff; padding:12px 16px;" class="van-hairline--bottom" :key="index">
                         <!-- <template v-if="item.key === 'blockHash'">
                             <div v-if="item.key != 'input'" style="min-width: 75px;">
                                 <span style="color: #888888;">
@@ -59,15 +59,13 @@
                             </div>
                         </template> -->
                     </div>
-                </template>
-                <template v-for="(item , index) in transInfoKey" :key="index" style=" ">
-                    <div v-if="item.key == 'input'" style="min-width: 105px;background:#fff; padding:16px 16px;">
-                        <span style="color: #888888;">
-                            {{item.name}}
-                        </span>
-                    </div>
-                    <template v-if="item.key == 'input'">
-                        <div style="padding:0 16px 16px 16px;">
+                    <template v-else-if="item.key == 'input'">
+                        <div style="min-width: 105px;background:#fff; padding:16px 16px;" :key="index + 'd1'">
+                            <span style="color: #888888;">
+                                {{item.name}}
+                            </span>
+                        </div>
+                        <div style="padding:0 16px 16px 16px;" :key="index + 'd2'">
                             <div style="background:#F8F8F8;border-radius: 4px;padding:12px;">
                                 <span v-if="showDecode" style="word-break: break-all;">{{transInfoData[item.key]}}</span><br v-if="showDecode">
                                 <div v-if="!showDecode">
@@ -84,7 +82,7 @@
                                         </span>
                                     </div>
                                     <div style="display: flex;">
-                                        <span class="input-key-item"></span>
+                                        <!-- <span class="input-key-item"></span> -->
                                         <table>
                                             <thead>
                                                 <tr>
@@ -114,7 +112,7 @@
             </van-tab>
             <van-tab title="交易回执">
                 <div v-for="item in txReceiptInfoList" :key="item">
-                    <div v-if="item.key!='logs'" style="display: flex;font-size: 12px; background:#fff; padding:16px 16px;" class="van-hairline--bottom">
+                    <div v-if="item.key != 'logs' && txInfoReceiptMap[item.key]" style="display: flex;font-size: 12px; background:#fff; padding:16px 16px;" class="van-hairline--bottom">
                         <div style="min-width: 75px;">
                             <span style="color: #888888;">
                                 {{item.name}}
@@ -161,7 +159,7 @@
                             </template>
                         </div>
                     </div>
-                    <div v-else style="font-size: 12px; background:#fff; padding:16px 16px;">
+                    <div v-else-if="item.key == 'logs'" style="font-size: 12px; background:#fff; padding:16px 16px;">
                         <div>
                             <div style="color:#888888;">
                                 {{item.key}}
@@ -227,8 +225,8 @@
 
 <script>
 import { reactive, ref, toRefs, onMounted, } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { Toast, Collapse, CollapseItem, Divider, Button } from 'vant';
+import { useRoute } from 'vue-router'
+import { Toast } from 'vant';
 import { hashTransactionInfo, getTransactionReceipt, getFunctionAbi } from '@/api/transaction.js'
 
 export default {
@@ -237,7 +235,6 @@ export default {
         const textVisible = ref('展开')
 
         const route = useRoute()
-        const router = useRouter()
         const transHash = route.query.transHash
         const blockTimestamp = route.query.blockTimestamp
         const groupId = sessionStorage.getItem('groupId')
@@ -695,5 +692,6 @@ table {
 .input-th {
     border: 1px solid #EBEEF5;
     padding: 2px 6px;
+    word-break: break-all;
 }
 </style>
