@@ -72,7 +72,7 @@
                                     <div class="iput-key">
                                         <span style="word-break: break-all;">
                                             <span class="input-key-item">方法 </span>
-                                            <span>{{funcData +" (" + abiType + outputType + ")"}}</span>
+                                            <span v-if="funcData">{{funcData +" (" + abiType + outputType + ")"}}</span>
                                         </span>
                                     </div>
                                     <div class="iput-key">
